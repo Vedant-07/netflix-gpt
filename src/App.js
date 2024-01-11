@@ -1,7 +1,13 @@
-import "./App.css";
+import Body from "./components/Body";
+import Header from "./components/Header";
 
 function App() {
-  return <div className=" text-6xl col">hi its me mario</div>;
+  return (
+    <>
+      <Header />
+      <Body />
+    </>
+  );
 }
 
 export default App;
