@@ -1,6 +1,12 @@
 import React from "react";
+import { useState } from "react";
 
 const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+
+  const toggleSigninForm = () => {
+    setIsSignInForm(!isSignInForm);
+  };
   return (
     <>
       <div className="absolute">
@@ -9,26 +15,61 @@ const Login = () => {
           alt=""
         />
       </div>
-      <div className="absolute   my-52 p-7 bg-black  bg-opacity-70   w-1/4 mx-auto right-0 left-0 ">
+      <div className="absolute   my-40 p-7 bg-black  bg-opacity-75   w-1/4 mx-auto right-0 left-0 ">
         <form action="" className="text-white">
-          <h1 className="font-bold text-2xl p-3">Sign in</h1>
+          <h1 className="font-bold text-4xl p-3 my-3">
+            {isSignInForm ? "Sign in " : "Sign up"}
+          </h1>
+
+          {!isSignInForm && (
+            <input
+              type="text"
+              className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
+              placeholder="Enter your full name "
+            />
+          )}
           <input
             type="text"
-            className="my-2 p-1 w-full"
+            className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
             placeholder="email or phone number "
           />
 
           <input
             type="text"
-            className="my-2 p-2 w-full"
+            className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
             placeholder="password "
           />
 
           <input
             type="button"
-            className="bg-red-700 w-full my-2 p-4"
-            value="Sign in"
+            className="bg-red-600  w-full mt-7 p-4 rounded-lg"
+            value={isSignInForm ? "Sign in" : "Sign up"}
           />
+
+          <div className=" flex p-1 my-4 w-full">
+            {isSignInForm ? (
+              <>
+                New to Netflix |
+                <p
+                  className=" mx-2 underline cursor-pointer "
+                  onClick={toggleSigninForm}
+                >
+                  Sign up now
+                </p>
+              </>
+            ) : (
+              <>
+                {" "}
+                Already a user |
+                <p
+                  className=" mx-2 underline cursor-pointer "
+                  onClick={toggleSigninForm}
+                >
+                  Sign in now
+                </p>
+              </>
+            )}
+          </div>
         </form>
       </div>
     </>
