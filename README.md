@@ -70,3 +70,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 Lastly and most imp thing , I would like to thank Akshay Saini for teaching such wonderful course🚀
+
+progress till now --> https://netflix-gpt-7.web.app/
