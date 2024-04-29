@@ -1,108 +1,126 @@
-import React from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
+import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "./../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const [errMsg, setErrMsg] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const email = useRef(null);
-  const pwd = useRef(null);
   const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const handleButtonClick = () => {
-    //validate the form data
-    //console.log(email.current.value, " ", pwd.current.value);
-    const msg = checkValidData(
-      email.current.value,
-      pwd.current.value,
-      name?.current?.value
-    );
-    console.log(msg);
-    setErrMsg(msg);
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
+
+    if (!isSignInForm) {
+      // Sign Up Logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      // Sign In Logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // Navigation code was here
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   };
 
-  const toggleSigninForm = () => {
+  const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
   return (
     <>
-      <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/594f8025-139a-4a35-b58d-4ecf8fdc507c/d3c4e455-f0bf-4003-b7cd-511dda6da82a/IN-en-20240108-popsignuptwoweeks-perspective_alpha_website_small.jpg"
-          alt="kuch tho hai idhar"
+      <div className="relative min-h-screen">
+  <div className="absolute inset-0">
+    <img
+      src="https://assets.nflxext.com/ffe/siteui/vlv3/fc164b4b-f085-44ee-bb7f-ec7df8539eff/d23a1608-7d90-4da1-93d6-bae2fe60a69b/IN-en-20230814-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+      alt="background"
+      className="object-cover w-full h-full"
+    />
+  </div>
+
+  <div className="absolute inset-0 flex items-center justify-center">
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="w-80  p-8 bg-black bg-opacity-80 text-white rounded-lg shadow-lg"
+    >
+      <h1 className="font-bold text-3xl mb-4">
+        {isSignInForm ? "Sign In" : "Sign Up"}
+      </h1>
+
+      {!isSignInForm && (
+        <input
+          ref={name}
+          type="text"
+          placeholder="Full Name"
+          className="input-field mb-4  p-2 w-full   bg-gray-700"
         />
-      </div>
-      <div className="absolute   my-40 p-7 bg-black  bg-opacity-75   w-1/4 mx-auto right-0 left-0 ">
-        <form
-          action=""
-          className="text-white"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <h1 className="font-bold text-4xl p-3 my-3">
-            {isSignInForm ? "Sign in " : "Sign up"}
-          </h1>
+      )}
+      <input
+        ref={email}
+        type="email"
+        placeholder="Email Address"
+        className="input-field mb-4 w-full p-2 bg-gray-700"
+      />
+      <input
+        ref={password}
+        type="text"
+        placeholder="Password"
+        className="input-field mb-4 w-full p-2  bg-gray-700"
+      />
+      <p className="text-red-500 font-bold text-lg my-2">{errorMessage}</p>
+      <button
+        className="btn-primary mt-4 w-full py-3 rounded-lg bg-red-600"
+        onClick={handleButtonClick}
+      >
+        {isSignInForm ? "Sign In" : "Sign Up"}
+      </button>
+      <p className="mt-4 cursor-pointer " onClick={toggleSignInForm}>
+        {isSignInForm
+          ? "New to Netflix? Sign Up Now"
+          : "Already registered? Sign In Now."}
+      </p>
+    </form>
+  </div>
+</div>
 
-          {!isSignInForm && (
-            <input
-              ref={name}
-              type="text"
-              className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
-              placeholder="Enter your full name "
-            />
-          )}
-          <input
-            ref={email}
-            type="text"
-            className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
-            placeholder="email or phone number "
-          />
 
-          <input
-            ref={pwd}
-            type="text"
-            className="my-4 p-3 w-full rounded-lg bg-gray-800 opacity-80"
-            placeholder="password "
-          />
 
-          <p className="text-yellow-400 text-center mt-3">
-            {errMsg && <>⚠️{errMsg}</>}
-          </p>
 
-          <button
-            className="bg-red-600 w-full mt-7 p-3 rounded-lg"
-            onClick={handleButtonClick}
-          >
-            {isSignInForm ? "Sign in" : "Sign up"}
-          </button>
 
-          <div className=" flex p-1 my-4 w-full">
-            {isSignInForm ? (
-              <>
-                New to Netflix |
-                <p
-                  className=" mx-2 underline cursor-pointer "
-                  onClick={toggleSigninForm}
-                >
-                  Sign up now
-                </p>
-              </>
-            ) : (
-              <>
-                {" "}
-                Already a user |
-                <p
-                  className=" mx-2 underline cursor-pointer "
-                  onClick={toggleSigninForm}
-                >
-                  Sign in now
-                </p>
-              </>
-            )}
-          </div>
-        </form>
-      </div>
     </>
   );
 };
