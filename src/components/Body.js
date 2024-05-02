@@ -14,31 +14,13 @@ const Body = () => {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <>
-      <Login />
-      </>
+      element: <Login />
     },
     {
       path: "/browse",
       element: <Browse />,
     },
   ]);
-
-  /* useEffect(()=>{
-    onAuthStateChanged(auth,(user)=> {
-      if(user){
-        if(user){
-          const {uid,email,displayName,photoURL}=user
-        console.log("in Body user in useEffect ===> ",user);
-        dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
-        }
-        else
-        {
-          dispatch(removeUser())
-        }
-      }
-    })
-  },[]) */
 
   return (
     <>
