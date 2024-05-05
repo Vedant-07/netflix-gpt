@@ -9,7 +9,7 @@ function App() {
   return (
     
       <Provider store={appStore}>
-        <div className="m-0 p-0 box-border">
+        <div className="m-0 p-0 box-border ">
           <Body />
         </div>
       </Provider>

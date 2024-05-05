@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Lastly and most imp thing , I would like to thank Akshay Saini for teaching such wonderful course🚀
 
-progress till now --> https://netflix-gpt-7.web.app/
+progress till now --> https://netflix-gpt-07.web.app/
