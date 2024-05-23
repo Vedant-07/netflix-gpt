@@ -9,8 +9,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addUser,removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { auth } from "../utils/firebase";
+import GPTPage from "../GPT/GptSearch"
 const Body = () => {
-  const dispatch=useDispatch()
   const appRouter = createBrowserRouter([
     {
       path: "/",

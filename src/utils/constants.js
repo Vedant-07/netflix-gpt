@@ -9,6 +9,18 @@ export const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Zjk2NjYzMWUxNTIzYzE4MWVlYjg2YWNkNzZiMzJkNiIsInN1YiI6IjY0Y2EwZGJhYmYwOWQxMDEwMWYxODk2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Y3RpHbTXBaxBgtKNokY1bssYf3BVYM746QHHmRFwjW8",
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NGJlZmY2MjY3OTZlYTEzZWNkNjhlOThmZTM0ODBkNiIsInN1YiI6IjY2MzI4MzUwYzYxNmFjMDEyODE4YjBhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MQ9Q0hoUkXfJAa6uNh_PguWwq5uimYW4QBxDAJ2Q37w",
   },
 };
+
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const BG_URL ="https://assets.nflxext.com/ffe/siteui/vlv3/fc164b4b-f085-44ee-bb7f-ec7df8539eff/d23a1608-7d90-4da1-93d6-bae2fe60a69b/IN-en-20230814-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier:"gujarati", name:"Gujarati"},
+  { identifier: "spanish", name: "Spanish" },
+  {identifier:"german",name:"German"}
+];

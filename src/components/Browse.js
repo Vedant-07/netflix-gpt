@@ -1,22 +1,30 @@
 import React from "react";
-import { useEffect } from "react";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import usePopularMovies from "../hooks/usePopularMovies";
 import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import { useSelector } from "react-redux";
+import GptSearch from "../GPT/GptSearch";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import useUpcomingMovies from "../hooks/useUpcomingMovies";
 const Browse = () => {
-  //console.log("in browse page");
+  const showGptSearch=useSelector((store)=>store.gpt.showGptSearch)
   useNowPlayingMovies()
-  //usePopularMovies();
+  usePopularMovies();
+  useTopRatedMovies()
+  useUpcomingMovies()
   return <>
   <Header/>
   <div className="h-screen overflow-x-hidden ">
-   
-     <MainContainer/>
-     
-      
-   <SecondaryContainer/>  
-   
+  {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
    </div>
   </>
 };
